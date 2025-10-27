@@ -1,20 +1,66 @@
-.reg{
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    color: #4d5271;
+:root {
+    --primary-color:  linear-gradient(135deg, #6d5dd3, #ffb6c1);
+    --font-family: 'Poppins', sans-serif;
+    --text-color:#555;
 }
-.reg a{
-    text-decoration: none;
-}
-.reg a:hover{
-    text-shadow: #4d5271 1px 1px 1px;
+body{
+    background: var(--primary-color);
+    min-height: 1000px;
+    font-family: 'Segoe UI';
 }
 
-body {
-    background: linear-gradient(135deg, #4d5271 0%, #f0e0ff 100%);
-    min-height: 100vh;
-    padding: 0px 0;
+.navbar{
+    text-align: center;
+    font-size: smaller;
+    font-family:'Segoe UI';
+    background-color: var(--primary-color);
+    color: white;
+    font-weight:600;
+    text-shadow:10px 0 10px hsla(209, 100%, 50%, 0.2)
 }
-.container-fluid {
+
+.navbar-brand{
+    transition: all 0.3s ease-in;
+    position: relative;
+    text-align: justify;
+    color:black;
+    text-shadow: 10px 0 20px white;
+}
+
+.nav-link:active{
+    color: white;
+}
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.navbar a.active {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: rgb(9, 71, 121); 
+}
+
+.nav-link:hover{
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover::after{
+    transform: scaleX(1);
+}
+
+h1{
+    color: white;
+    text-shadow:
+      0 0 10px hsla(209, 100%, 50%, 0.2)
+}
+
+.container-fluid{
     max-width: 1000px;
     margin:  auto;
     position: absolute;
@@ -24,21 +70,70 @@ body {
     text-align: center;
 }
 
-.header-card {
-    background: white;
-    border-radius: 15px;
+.header-card,
+.task-card {
+    border-radius: 30px;
     padding: 30px;
     margin-bottom: 25px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out;
 }
-.task-card{
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+.header-card:hover,
+.task-card:hover{
+    transform: translateY(5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
+
+.reg{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.reg a{
+    color: white;
+    text-decoration: none;
+    margin: 0 2px;
+    font-weight: 600;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: var(--font-family);
+}
+
+.reg a:hover{
+    text-shadow: #4a548f48 5px 5px 5px;
+}
+
+.btn{
+    border:rosybrown;
+    border-color: #555;
+    border-radius: 100px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn:hover{
+     transition: all 0.3s ease-in;
+     border-radius: 100px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(255,255,255,0.9);
+}
+
 .row{
     text-align: center;
     margin: 10px;
 }
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
