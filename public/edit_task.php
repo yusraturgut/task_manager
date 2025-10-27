@@ -1,58 +1,45 @@
 <?php
 require_once "../config/db.php";
 require_once "../includes/auth_check.php"; 
+require_once "../function/functions.php";
 
-// Kullanıcı girişi kontrolü
+$user_id=$_SESSION["user_id"];
+$message="";
 
-
-$user_id = $_SESSION["user_id"];
-$message = "";
-
-if (!isset($_GET["id"])||!is_numeric($_GET["id"])) {
-    header("Location:dashboard.php");
-    exit;
+if(!isset($_GET["id"])||!is_numeric($_GET["id"])){
+    header("Location: dashboard.php");
+    exit();
 }
-
 $task_id=(int)$_GET["id"];
+$result = get_task($user_id,$task_id);
 
-//Mevcut görev verilerini getir
-$stmt = mysqli_prepare($conn, "SELECT title, description, status FROM tasks WHERE id=? AND user_id=?");
-mysqli_stmt_bind_param($stmt, "ii", $task_id, $user_id);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $title, $description, $status);
-
-
-if(!mysqli_stmt_fetch($stmt)) {
-    mysqli_stmt_close($stmt);
+if (!$result["success"]) {
     header("Location: dashboard.php");
     exit;
 }
-mysqli_stmt_close($stmt); 
+
+$task = $result["task"];
+$title = $task["title"];
+$description = $task["description"];
+$status = $task["status"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $new_title = trim($_POST['title']);
-    $new_description = trim($_POST['description']);
+    $new_title = $_POST['title'];
+    $new_description = $_POST['description'];
     $new_status = $_POST['status'];
-
-   if ($new_title !== "") {
-        $update_sql = "UPDATE tasks SET title = ?, description = ?, status = ? WHERE id = ? AND user_id = ?";
-        $stmt = mysqli_prepare($conn, $update_sql);
-        mysqli_stmt_bind_param($stmt, "sssii", $new_title, $new_description, $new_status, $task_id, $user_id);
-
-        if (mysqli_stmt_execute($stmt)) {
-            header("Location: dashboard.php?msg=task_updated");
-            exit;
-        } else {
-            $message = "Güncelleme sırasında bir hata oluştu.";
-        }
-
-        mysqli_stmt_close($stmt);
+    
+    $update_result = update_task($user_id, $task_id, $new_title, $new_description, $new_status);
+    
+    if ($update_result["success"]) {
+        header("Location: dashboard.php?msg=task_updated");
+        exit;
     } else {
-        $message = "Görev başlığı boş olamaz.";
+        $message = $update_result["message"];
     }
 }
 
 ?>
+
 <?php include "../includes/header.php"; ?>
 
 <div class="container mt-4">

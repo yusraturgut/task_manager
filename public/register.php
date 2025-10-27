@@ -2,43 +2,20 @@
 require_once "../config/db.php";
 // Kullanıcı girişi kontrolü
 require_once "../includes/auth_check.php"; 
+require_once "../function/functions.php";
 
 $message = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username =trim( $_POST["username"]);
-    $password =trim( $_POST["password"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    if($username === "" || $password === ""){
-        $message = "Tüm alanları doldurunuz.";
-    }else{
-        // Kullanıcı var mı kontrol et
-        $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE username=?");
-        mysqli_stmt_bind_param($stmt, "s", $username);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
+    require_once "../function/functions.php";
+    $result = register_user($username, $password);
 
-        if (mysqli_stmt_num_rows($stmt) > 0) {
-            $message = "Bu kullanıcı mevcut.";
-        } else {
-            
-            
-
-            $insert_stmt = mysqli_prepare($conn, "INSERT INTO users (username, password) VALUES (?, ?)");
-            mysqli_stmt_bind_param($insert_stmt, "ss", $username,$password);
-
-            if (mysqli_stmt_execute($insert_stmt)) {
-                mysqli_stmt_close($insert_stmt);
-                header("Location: index.php");
-                exit;
-            } else {
-                $message = "Kayıt sırasında bir hata oluştu.";
-            }
-        }
-
-        mysqli_stmt_close($stmt);
-    }
+    $message = $result['message'];
 }
+  
 ?>
 <?php include "../includes/header.php"; ?>
 

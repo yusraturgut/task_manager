@@ -3,21 +3,19 @@ require_once "../config/db.php";
 
 // Kullanıcı girişi kontrolü
 require_once "../includes/auth_check.php"; 
+require_once "../function/functions.php";
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION["user_id"];
+$error_message = "";
 
-// Görevleri çek
-$sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC";
-$stmt = mysqli_prepare($conn, $sql);//SQL injection'a karşı koruma sağlamak için kullanılır
-mysqli_stmt_bind_param($stmt, "i", $user_id);//UserID değerini ?yerine koyuyor
-mysqli_stmt_execute($stmt);//SQL sorgusunu çalıştırıyor
-$result = mysqli_stmt_get_result($stmt);//sonuçları alıyor 
+$result = get_user_tasks($user_id);
 
-$tasks = [];
-while ($row = mysqli_fetch_assoc($result)) {//her satırı dizi şeklinde alır tasks dizisine ekler
-    $tasks[] = $row;
+if($result["success"]){
+    $tasks = $result["tasks"];
+} else {
+    $error_message = $result['message'] ?? 'Görevler alınamadı.';
+    $tasks = [];
 }
-mysqli_stmt_close($stmt);//sorgu kapatılır.
 
 ?> 
 

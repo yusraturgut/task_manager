@@ -1,37 +1,19 @@
-
 <?php
-require_once "../config/db.php";
+require_once "../function/functions.php";
 
-$error = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"] ?? '');
-    $password = trim($_POST["password"] ?? '');
+    $user_id = authenticate_user($username, $password);
 
-    if ($username === '' || $password === '') {
-        $error = "Lütfen tüm alanları doldurun.";
+    if ($user_id) {
+        $_SESSION["user_id"] = $user_id;
+        $_SESSION["username"] = $username;
+        header("Location: dashboard.php");
+        exit;
     } else {
-        // Kullanıcıyı sorgula
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        if ($user = mysqli_fetch_assoc($result)) {
-            // Şifre kontrolü (şifre düz metinse direkt karşılaştır, hash’li ise password_verify kullan)
-            if ($password === $user['password']) {
-                $_SESSION['user_id'] = $user['id'];
-                header("Location: dashboard.php");
-                exit;
-            } else {
-                $error = "Şifre hatalı!";
-            }
-        } else {
-            $error = "Kullanıcı bulunamadı!";
-        }
-
-        mysqli_stmt_close($stmt);
+        $error = "Kullanıcı adı veya şifre hatalı.";
     }
 }
 ?>
