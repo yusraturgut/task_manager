@@ -6,7 +6,7 @@ require_once "../function/functions.php";
 
 $message = "";
 $error="";
-
+// Kullanıcı kaydı işlemi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
