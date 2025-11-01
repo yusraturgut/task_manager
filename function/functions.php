@@ -6,6 +6,7 @@ function get_database_connection() {
     global $conn;
     return $conn;
 }
+
 //Görevi kullanıcı ID'si ve görev ID'sine göre getiren fonksiyon
 function get_task($user_id, $task_id) {
     $conn = get_database_connection();
@@ -89,14 +90,22 @@ function authenticate_user($username, $password) {
     mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
 
-    if ($user = mysqli_fetch_assoc($result)) {
-        if ($password === $user['password']) {
-            return $user['id'];
-        }
+    if (!$user) {
+        return ["success" => false, "message" => "Kullanıcı bulunamadı."];
     }
-    return false;
+
+    if ($password === $user['password']) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+
+        return ["success" => true, "message" => "Giriş başarılı!", "user_id" => $user['id']];
+    } else {
+        return ["success" => false, "message" => "Şifre hatalı."];
 }
+}
+
 //Kullanıcı kayıt fonksiyonu
 function register_user($username, $password) {
     $conn = get_database_connection();
@@ -132,39 +141,35 @@ function register_user($username, $password) {
     }
 }
 //Görev ekleme fonksiyonu
-function add_task($user_id, $title, $description) {
-    $conn = get_database_connection();
-    $title=trim($title);
-    $description=trim($description);
-    $status = "pending";
+function add_task($user_id, $title, $description, $status) {
+    global $conn;
 
-    if ($title === "") {
-        return[
-        "success"=>false,
-        "message"=>" Lütfen görev başlığı girin."
-        ]; 
+    if (mb_strlen($description) > 250) {
+        return [
+            "success" => false,
+            "message" => "Açıklama en fazla 250 karakter olabilir."
+        ];
     }
 
-    $sql = "INSERT INTO tasks(user_id, title, description, status, created_at) VALUES (?, ?, ?, ?, NOW())";
-    $stmt = mysqli_prepare($conn, $sql);
+    $stmt = mysqli_prepare($conn, "INSERT INTO tasks (user_id, title, description, status) VALUES (?, ?, ?, ?)");
     mysqli_stmt_bind_param($stmt, "isss", $user_id, $title, $description, $status);
 
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
         return [
-            "success"=> true,
-            
-        "message"=>" Görev başarıyla eklendi."
-        ]; 
+            "success" => true,
+            "message" => "Görev başarıyla eklendi."
+        ];
     } else {
+        $error = mysqli_error($conn);
         mysqli_stmt_close($stmt);
         return [
-            "success"=> false,
-            "message"=> "Görev eklenirken bir hata oluştu."
+            "success" => false,
+            "message" => "Görev eklenirken bir hata oluştu: " . $error
         ];
-
     }
 }
+
 //Görev silme fonksiyonu
  function delete_task($user_id, $task_id) {
     $conn = get_database_connection();
@@ -184,10 +189,9 @@ function add_task($user_id, $title, $description) {
         return [
             "success"=> false,
             "message"=> "Görev silinirken bir hata oluştu."
-        ];
-    }
+        ];}
 
-}
+    }
 //Görev güncelleme fonksiyonu
 function update_task($user_id, $task_id, $title, $description, $status) {
     $conn = get_database_connection();
@@ -211,4 +215,33 @@ function update_task($user_id, $task_id, $title, $description, $status) {
     }
 }
 
+// Görev sayısını durumuna göre döndüren fonksiyon
+function getTaskCount($status) {
+     if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['user_id'])) {
+        return 0; // Kullanıcı giriş yapmamışsa
+    }
+
+    $userId = $_SESSION['user_id'];
+    $conn = get_database_connection();
+    $sql = "SELECT COUNT(*) AS count FROM tasks WHERE status = ? AND user_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if (!$stmt) {
+        return 0;
+    }
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $userId);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    mysqli_stmt_close($stmt);
+
+    return isset($row['count']) ? (int)$row['count']:0;
+}
 ?>
