@@ -1,0 +1,625 @@
+/* ==================== GENEL DEĞİŞKENLER ==================== */
+:root {
+    --primary-color: linear-gradient(135deg, #6d5dd3, #ffb6c1);
+    --font-family: 'Segoe UI';
+    --text-color: #555;
+}
+
+/* ==================== TEMEL STİLLER ==================== */
+body {
+    background: var(--primary-color);
+    min-height: 100vh;
+    height: max-content;
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+}
+
+h1,h2 {
+    color: white;
+    text-shadow: 0 0 10px hsla(209, 100%, 50%, 0.2);
+}
+p{
+    font-size: 19px;
+    font-weight: 600;
+}
+
+/* ==================== NAVİGASYON ==================== */
+.navbar {
+    text-align: center;
+    font-size: smaller;
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    text-shadow: 10px 0 10px hsla(209, 100%, 50%, 0.2);
+}
+
+.navbar-brand {
+    transition: all 0.3s ease-in;
+    position: relative;
+    text-align: justify;
+    color: black;
+    text-shadow: 10px 0 20px white;
+}
+
+input[type=text]:focus
+ {
+    font-family: var(--font-family);
+  border: 5px solid #555;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.nav-link {
+    text-transform: capitalize;
+}
+
+.nav-link:hover {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ==================== CONTAINER ==================== */
+.container-fluid {
+    flex: 1;
+    max-width: 1000px;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.sticky-container {
+    top: 0;
+    z-index: 10;
+    background: inherit;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    backdrop-filter: blur(8px);
+}
+
+/* ==================== KARTLAR ==================== */
+.header-card,
+.task-card {
+    top: 0;
+    border-radius: 30px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-card:hover,
+.task-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================== KAYIT LİNKLERİ ==================== */
+.reg {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.reg a {
+    color: white;
+    text-decoration: none;
+    margin: 0 2px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: var(--font-family);
+}
+
+.reg a:hover {
+    text-shadow: #4a548f48 5px 5px 5px;
+}
+
+/* ==================== BUTONLAR ==================== */
+
+.btn,
+.btn-upd,
+.btn-canc {
+    border: rosybrown;
+    border-color: #be09d6;
+    border-radius: 100px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-upd:hover
+{
+    animation: pulse 3s forwards;
+    background: rgba(13, 117, 187, 0.548);
+    transform: translateY(-3px);
+    color: white;
+}
+.btn-canc:hover
+{
+    animation: pulse 3s forwards;
+    background: rgba(187, 13, 13, 0.548);
+    transform: translateY(-3px);
+    color: white;
+}
+
+.btn:hover {
+    transition: all 0.5s ease-in;
+    border-radius: 100px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(0, 0, 0, 0.9);
+    color: #743259;
+
+}
+
+/*Düzenle Butonu */
+.btn-re {
+    display: inline-block;
+    padding: 6px 12px; 
+    font-size: 14px;   
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 8px; 
+    background: transparent; /* kutu görünmesin */
+    color: rgba(255,255,255,1); /* yazı opak olsun */
+    border: none; /* çerçeveyi kaldır */
+    box-shadow: none; /* gölgeyi kaldır */
+    backdrop-filter: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-re:hover {
+    opacity: 1;
+    background: #0c9e187c;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(60, 70, 123, 0.4);
+    color: white;
+}
+
+/* Sil Butonu */
+.btn-del {
+    display: inline-block;
+    padding: 6px 12px; 
+    font-size: 14px;   
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 8px; 
+    background: transparent; /* kutu görünmesin */
+    color: rgba(255,255,255,1); /* yazı opak olsun */
+    border: none; /* çerçeveyi kaldır */
+    box-shadow: none; /* gölgeyi kaldır */
+    backdrop-filter: none;
+}
+
+.btn-del:hover {
+    background: rgba(163, 21, 21, 0.548);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(60, 70, 123, 0.4);
+    color: white;
+}
+
+/* Tıklama için */
+.btn-re:active,
+.btn-del:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px #743259;
+}
+
+
+
+/* ==================== DİĞER YARDIMCI SINIFLAR ==================== */
+.row {
+    text-align: center;
+    margin: 10px;
+}
+
+.alert {
+    border-radius: 30px;
+    padding: 5px 6px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    font-size: larger;
+    animation: hataMesaj 3s forwards;
+}
+
+.desc {
+    position: relative;
+    font-weight: 700;
+    font-size: larger;
+    color: white;
+    font-family: var(--font-family);
+}
+
+/* ==================== TABLO ==================== */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    width: 100%;
+    border-radius: 10px;
+table-layout: fixed;
+box-sizing: border-box;}
+    
+.table thead th {
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    padding: 15px;
+}
+
+.table tbody td {
+    border: none;
+    vertical-align: middle;
+    color: white;
+    font-weight: bolder;
+    font-family: var(--font-family);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table tbody td:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.table tbody td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.table tr th {
+     font-weight: bold;
+    font-family: var(--font-family);
+    /* responsive: maksimum büyüsün ama küçük ekranlarda da sığsın */
+    font-size: clamp(15px, 1.6vw, 20px);
+    line-height: 1.2;
+    padding: 8px 6px; /* daralmaya izin verecek şekilde hafif azaltıldı */
+    backdrop-filter: blur(9px);
+    color: #743259;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    white-space: normal; /* satır sarma olsun */
+    overflow-wrap: anywhere; /* uzun kelimeleri kır */
+    word-break: break-word;
+}
+
+.table tr th:hover {
+    box-shadow: 0 18px 40px rgba(109, 93, 211, 0.25);
+    transform: translateY(-3px);
+}
+
+.table tr th:hover::before {
+    transform: translateX(100%);
+}
+
+.table-responsive {
+    text-transform: capitalize;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+.table tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+/*Tablonun içindeki durumun içindeki "Tamamlandı- Bekliyor" yazısı.*/
+.badge-wait, .badge-comp {
+    text-transform: capitalize;
+    padding: 8px 12px;
+    font-size: 15px;
+    font-family: var(--font-family);
+    font-weight: bold;
+    padding: 10px;
+}
+.success {
+    font-family: var(--font-family);
+    font-weight: 500;
+    color: white;
+    padding: 12px 24px;
+    margin: 10px auto;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(12, 158, 24, 0.9), rgba(109, 93, 211, 0.3));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 25px rgba(12, 158, 24, 0.2);
+    transform-origin: center;
+    animation: hataMesaj 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    text-align: center;
+    max-width: 400px;
+}
+
+
+.table-container {
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    scrollbar-width: auto;
+    scrollbar-color: rgba(109, 93, 211, 0.5) transparent;
+    height: auto;
+    overflow: visible;
+}
+
+.table tbody tr {
+    animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.1s;
+}
+
+/*Bekleyen-Tamamlanan*/
+.waitin, .completin {
+  display: inline-block;
+  width: 200px;
+  height: 90px;
+  border-radius: 15px;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  }
+
+  .status{
+
+  font-weight: 600;
+  color: #fff;
+   display: flex;
+  justify-content: space-between; /* kutuları iki uçta istiyorsanız space-between, ortada dengeli isterseniz center ve gap kullanın */
+  align-items: center;
+  gap: 40px; /* kutular arasındaki boşluk (space-between kullanıyorsanız optional) */
+  max-width: 700px; /* container ile hizalamak için ayar — ihtiyaca göre değiştirin (ör. 1000px) */
+  margin: 30px auto; /* yatay ortala */
+  padding: 10px 20px;
+  }
+
+.waitin:hover, .completin:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.waitin:hover{ background: linear-gradient(135deg, #cc151e,#d19ca8);
+    color: #fff;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.completin:hover{
+    
+    background: linear-gradient(135deg,rgba(12, 158, 24, 0.85), 
+        rgba(192, 192, 192, 0.95)
+    );
+    color: #fff;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 10px 30px rgba(12, 158, 24, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active durumu */
+.waitin:active, .completin:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Yazı kısmı */
+.wait-card, .comp-card {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+/* ==================== MODAL ==================== */
+.modal-content {
+    background: var(--primary-color);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    animation: modalFadeIn 1s forwards;
+}
+
+.modal-header {
+    padding: 25px 30px;
+    color: white;
+}
+
+.modal-header .close {
+    color: white;
+    opacity: 0.8;
+    text-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.modal-header .close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 30px;
+    color: rgb(104, 79, 79);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
+}
+.modal .form-control {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 15px;
+    padding: 12px 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal .form-control:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+.modal .form-label {
+    font-family: var(--font-family);
+    color: white;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.mb-3{
+    text-align: left;
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+}
+.login{
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+
+
+/* Modal butonları */
+.modal .btn {
+    padding: 10px 25px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.modal .btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.modal .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.modal .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+.form-label{
+    font-weight: bolder;
+    font-family: var(--font-family);
+    text-shadow: 10px 8px 10px hsla(209, 100%, 50%, 0.2);
+    color: #fff;
+}
+
+.form-select{
+    font-family: var(--font-family);
+    font-size: 17px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+/* ==================== ANİMASYONLAR ==================== */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-30px) translateX(-30px) scale(0.9);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(5px) translateX(5px) scale(1.02);
+    }
+    100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes hataMesaj {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.05);
+    }
+
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
