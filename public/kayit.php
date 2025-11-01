@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
   
 ?>
-
+ 
 <?php include "../partials/index-header.php" ?>
 <div class="container text-center">
     <div class="row justify-content-center">

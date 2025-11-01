@@ -1,10 +1,7 @@
 <?php
-<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-=======
->>>>>>> 35638025176caefe050be83e3965f5b6bbd1d8be
 require_once "../function/functions.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -71,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       placeholder="Kullanıcı adınızı girin" 
       required>
 </div>
-<<<<<<< HEAD
  <div class="mb-3">
               <label for="password" class="form-label">Şifre</label>
               <input 
@@ -88,19 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <hr><div class="reg"> Hesabınız yok mu? <a class="reg" href="kayit.php">Kayıt</a> olun.</div>
         </form></div>
 
-=======
-  <div class="mb-3">
-  <label for="password" class="form-label">Şifre</label>
-  <input 
-      type="password" 
-      class="form-control" 
-      id="password" 
-      name="password" 
-      placeholder="Şifrenizi girin" 
-      required>
-        </form></div>
-         <div class="login" button type="submit" class="btn btn-success-outline bg-transparent border-success">Giriş Yap</button></div>
-        <hr><div class="reg"> Hesabınız yok mu? <a class="reg" href="kayit.php">Kayıt</a> olun.</div>
->>>>>>> 35638025176caefe050be83e3965f5b6bbd1d8be
     </div>
 <?php include "../partials/index-footer.php" ?>
