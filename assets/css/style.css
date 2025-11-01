@@ -6,6 +6,10 @@
 }
 
 /* ==================== TEMEL STİLLER ==================== */
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: var(--primary-color);
     min-height: 100vh;
@@ -13,6 +17,8 @@ body {
     font-family: var(--font-family);
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 h1,h2 {
@@ -29,7 +35,7 @@ p{
     text-align: center;
     font-size: smaller;
     font-family: var(--font-family);
-    background-color: var(--primary-color);
+    background-color: transparent;
     color: white;
     font-weight: 600;
     text-shadow: 10px 0 10px hsla(209, 100%, 50%, 0.2);
@@ -43,10 +49,9 @@ p{
     text-shadow: 10px 0 20px white;
 }
 
-input[type=text]:focus
- {
+input[type=text]:focus {
     font-family: var(--font-family);
-  border: 5px solid #555;
+    border: 5px solid #555;
 }
 
 .navbar a {
@@ -74,10 +79,17 @@ input[type=text]:focus
 .container-fluid {
     flex: 1;
     max-width: 1000px;
-    margin: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 20px;
     text-align: center;
+}
+
+/* Responsive için */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 30px 15px;
+    }
 }
 
 .sticky-container {
@@ -95,7 +107,7 @@ input[type=text]:focus
     top: 0;
     border-radius: 30px;
     padding: 30px;
-    margin-bottom: 25px;
+    margin: 0 auto 25px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -140,15 +152,14 @@ input[type=text]:focus
     transition: all 0.3s ease;
 }
 
-.btn-upd:hover
-{
+.btn-upd:hover {
     animation: pulse 3s forwards;
     background: rgba(13, 117, 187, 0.548);
     transform: translateY(-3px);
     color: white;
 }
-.btn-canc:hover
-{
+
+.btn-canc:hover {
     animation: pulse 3s forwards;
     background: rgba(187, 13, 13, 0.548);
     transform: translateY(-3px);
@@ -163,10 +174,9 @@ input[type=text]:focus
     text-underline-offset: 4px;
     text-decoration-color: rgba(0, 0, 0, 0.9);
     color: #743259;
-
 }
 
-/*Düzenle Butonu */
+/* Düzenle Butonu */
 .btn-re {
     display: inline-block;
     padding: 6px 12px; 
@@ -178,10 +188,10 @@ input[type=text]:focus
     vertical-align: middle;
     border-radius: 10px;
     margin-right: 8px; 
-    background: transparent; /* kutu görünmesin */
-    color: rgba(255,255,255,1); /* yazı opak olsun */
-    border: none; /* çerçeveyi kaldır */
-    box-shadow: none; /* gölgeyi kaldır */
+    background: transparent;
+    color: rgba(255,255,255,1);
+    border: none;
+    box-shadow: none;
     backdrop-filter: none;
     transition: color 0.2s ease, transform 0.2s ease;
 }
@@ -206,10 +216,10 @@ input[type=text]:focus
     vertical-align: middle;
     border-radius: 10px;
     margin-right: 8px; 
-    background: transparent; /* kutu görünmesin */
-    color: rgba(255,255,255,1); /* yazı opak olsun */
-    border: none; /* çerçeveyi kaldır */
-    box-shadow: none; /* gölgeyi kaldır */
+    background: transparent;
+    color: rgba(255,255,255,1);
+    border: none;
+    box-shadow: none;
     backdrop-filter: none;
 }
 
@@ -227,12 +237,24 @@ input[type=text]:focus
     box-shadow: 0 2px 8px #743259;
 }
 
+/* İşlemler sütunu - butonları yan yana hizala */
+.table tbody td:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
 
+.table tbody td:last-child form {
+    margin: 0;
+    display: inline-block;
+}
 
 /* ==================== DİĞER YARDIMCI SINIFLAR ==================== */
 .row {
     text-align: center;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .alert {
@@ -258,8 +280,9 @@ input[type=text]:focus
     border-spacing: 0 15px;
     width: 100%;
     border-radius: 10px;
-table-layout: fixed;
-box-sizing: border-box;}
+    table-layout: fixed;
+    box-sizing: border-box;
+}
     
 .table thead th {
     border: none;
@@ -289,20 +312,19 @@ box-sizing: border-box;}
 }
 
 .table tr th {
-     font-weight: bold;
+    font-weight: bold;
     font-family: var(--font-family);
-    /* responsive: maksimum büyüsün ama küçük ekranlarda da sığsın */
     font-size: clamp(15px, 1.6vw, 20px);
     line-height: 1.2;
-    padding: 8px 6px; /* daralmaya izin verecek şekilde hafif azaltıldı */
+    padding: 8px 6px;
     backdrop-filter: blur(9px);
     color: #743259;
     background: transparent;
     border: none;
     box-shadow: none;
     text-align: center;
-    white-space: normal; /* satır sarma olsun */
-    overflow-wrap: anywhere; /* uzun kelimeleri kır */
+    white-space: normal;
+    overflow-wrap: anywhere;
     word-break: break-word;
 }
 
@@ -319,7 +341,8 @@ box-sizing: border-box;}
     text-transform: capitalize;
     height: auto;
     max-height: none;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
 .table tr:hover {
@@ -327,15 +350,15 @@ box-sizing: border-box;}
     transform: scale(1.02);
 }
 
-/*Tablonun içindeki durumun içindeki "Tamamlandı- Bekliyor" yazısı.*/
+/* Tablonun içindeki durumun içindeki "Tamamlandı-Bekliyor" yazısı */
 .badge-wait, .badge-comp {
     text-transform: capitalize;
     padding: 8px 12px;
     font-size: 15px;
     font-family: var(--font-family);
     font-weight: bold;
-    padding: 10px;
 }
+
 .success {
     font-family: var(--font-family);
     font-weight: 500;
@@ -352,7 +375,6 @@ box-sizing: border-box;}
     text-align: center;
     max-width: 400px;
 }
-
 
 .table-container {
     max-height: calc(100vh - 400px);
@@ -372,71 +394,84 @@ box-sizing: border-box;}
     animation-delay: 0.1s;
 }
 
-/*Bekleyen-Tamamlanan*/
+/* ==================== DURUM KUTUSU (Bekleyen-Tamamlanan) ==================== */
+.status {
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+/* Bootstrap col sınıflarını geçersiz kıl */
+.status .row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 0;
+}
+
+.status .col-md-6 {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    padding: 0;
+}
+
+/* Bekleyen-Tamamlanan Kutuları */
 .waitin, .completin {
-  display: inline-block;
-  width: 200px;
-  height: 90px;
-  border-radius: 15px;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
-  }
-
-  .status{
-
-  font-weight: 600;
-  color: #fff;
-   display: flex;
-  justify-content: space-between; /* kutuları iki uçta istiyorsanız space-between, ortada dengeli isterseniz center ve gap kullanın */
-  align-items: center;
-  gap: 40px; /* kutular arasındaki boşluk (space-between kullanıyorsanız optional) */
-  max-width: 700px; /* container ile hizalamak için ayar — ihtiyaca göre değiştirin (ör. 1000px) */
-  margin: 30px auto; /* yatay ortala */
-  padding: 10px 20px;
-  }
+    display: inline-block;
+    width: 200px;
+    height: 90px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    margin: 0;
+}
 
 .waitin:hover, .completin:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.waitin:hover{ background: linear-gradient(135deg, #cc151e,#d19ca8);
+.waitin:hover {
+    background: linear-gradient(135deg, #cc151e,#d19ca8);
     color: #fff;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.completin:hover{
-    
-    background: linear-gradient(135deg,rgba(12, 158, 24, 0.85), 
-        rgba(192, 192, 192, 0.95)
-    );
+
+.completin:hover {
+    background: linear-gradient(135deg,rgba(12, 158, 24, 0.85), rgba(192, 192, 192, 0.95));
     color: #fff;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-        0 10px 30px rgba(12, 158, 24, 0.2),
-        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(12, 158, 24, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Active durumu */
 .waitin:active, .completin:active {
     transform: translateY(1px);
-    box-shadow: 
-        0 5px 15px rgba(0, 0, 0, 0.1),
-        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Yazı kısmı */
 .wait-card, .comp-card {
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 0.3px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
 }
 
 /* ==================== MODAL ==================== */
@@ -475,6 +510,7 @@ box-sizing: border-box;}
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 25px 30px;
 }
+
 .modal .form-control {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -483,12 +519,14 @@ box-sizing: border-box;}
     padding: 12px 20px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .modal .form-control:focus {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
 }
+
 .modal .form-label {
     font-family: var(--font-family);
     color: white;
@@ -497,20 +535,20 @@ box-sizing: border-box;}
     font-size: 20px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.mb-3{
+
+.mb-3 {
     text-align: left;
     color: white;
     font-weight: bolder;
     font-size: larger;
 }
-.login{
+
+.login {
     text-align: center;
     color: white;
     font-weight: bolder;
     font-size: larger;
 }
-
-
 
 /* Modal butonları */
 .modal .btn {
@@ -544,19 +582,21 @@ box-sizing: border-box;}
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
-.form-label{
+
+.form-label {
     font-weight: bolder;
     font-family: var(--font-family);
     text-shadow: 10px 8px 10px hsla(209, 100%, 50%, 0.2);
     color: #fff;
 }
 
-.form-select{
+.form-select {
     font-family: var(--font-family);
     font-size: 17px;
     margin-bottom: 10px;
     font-weight: 500;
 }
+
 /* ==================== ANİMASYONLAR ==================== */
 @keyframes slideIn {
     0% {
@@ -591,7 +631,6 @@ box-sizing: border-box;}
     }
 }
 
-
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -607,10 +646,9 @@ box-sizing: border-box;}
     0%, 100% {
         transform: scale(1);
     }
-    50%{
+    50% {
         transform: scale(1.05);
     }
-
 }
 
 @keyframes modalFadeIn {
@@ -621,5 +659,28 @@ box-sizing: border-box;}
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
+    }
+}
+
+/* ==================== RESPONSIVE TASARIM ==================== */
+@media (max-width: 768px) {
+    .status {
+        gap: 20px;
+        padding: 10px;
+    }
+    
+    .waitin, .completin {
+        width: 150px;
+        height: 80px;
+        font-size: 16px;
+    }
+    
+    .table {
+        font-size: 14px;
+    }
+    
+    .table tr th {
+        font-size: 14px;
+        padding: 6px 4px;
     }
 }
