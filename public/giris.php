@@ -83,6 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         <hr><div class="reg"> Hesabınız yok mu? <a class="reg" href="kayit.php">Kayıt</a> olun.</div>
         </form></div>
-
+        
     </div>
 <?php include "../partials/index-footer.php" ?>

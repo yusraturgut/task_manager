@@ -147,6 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['title']) && !isset($_
             <?php else: ?>
                  <div class="status">
                  <div class="row mt-4">
+                    
                 <div class="col-md-6 mb-3">
                     <div class="waitin">
                         <div class="wait-card">
