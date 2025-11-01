@@ -143,15 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['title']) && !isset($_
             </div>
             <?php if (empty($tasks)): ?>
                 <div class="alert alert-info mt-4">Henüz bir göreviniz yok. Yeni görev ekleyebilirsiniz.</div>
-            <?php else: ?>
-<<<<<<< HEAD
-                 
+            <?php else: ?>                
                  <div class="row mt-4">
                    <div class="status"> 
-=======
                  <div class="row mt-4">
                  <div class="status">
->>>>>>> f3240779ff077dc25cb453100c93ee54a997b801
                 <div class="col-md-6 mb-3">
                     <div class="waitin">
                         <div class="wait-card">
